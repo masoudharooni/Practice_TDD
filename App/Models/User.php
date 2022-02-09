@@ -6,24 +6,17 @@ class User
 {
     private string $first_name;
     private string $last_name;
-    public function setFirstName(string $firstName)
+    private string $full_name;
+    private string $age;
+    public function __call($methodName, $arguments)
     {
-        $this->first_name = trim($firstName);
-    }
-    public function getFirstName()
-    {
-        return $this->first_name;
-    }
-    public function setLastName(string $lastName)
-    {
-        $this->last_name = trim($lastName);
-    }
-    public function getLastName()
-    {
-        return $this->last_name;
-    }
-    public function getFullName()
-    {
-        return "{$this->first_name} {$this->last_name}";
+        $propertyName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', substr($methodName, 3)));
+        if (property_exists($this, $propertyName)) {
+            if (substr($methodName, 0, 3) == "set") {
+                $this->$propertyName = trim($arguments[0]);
+            } elseif (substr($methodName, 0, 3) == "get") {
+                return $this->$propertyName;
+            }
+        }
     }
 }

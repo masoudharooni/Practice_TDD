@@ -20,8 +20,13 @@ class UserTest extends TestCase
     public function testThatWeCanGetFullName()
     {
         $user = new User;
-        $user->setFirstName("Masoud");
-        $user->setLastName("Harooni");
+        $user->setFullName("Masoud Harooni");
         $this->assertEquals($user->getFullName(), "Masoud Harooni");
+    }
+    public function testThatWeCanGetUserAge()
+    {
+        $user = new User;
+        $user->setAge(17);
+        $this->assertEquals($user->getAge(), 17);
     }
 }
