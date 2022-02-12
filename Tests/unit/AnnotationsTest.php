@@ -20,4 +20,24 @@ class Annotations extends TestCase
         $value++;
         $this->assertEquals(2, $value);
     }
+
+    /**
+     * @dataProvider numberProvider
+     */
+    public function testCheckCorrectNumbers($number)
+    {
+        $this->assertTrue($number > 0);
+    }
+
+    public function numberProvider()
+    {
+        return [
+            [1],
+            [2],
+            [3],
+            [4],
+            [5],
+            [6]
+        ];
+    }
 }
